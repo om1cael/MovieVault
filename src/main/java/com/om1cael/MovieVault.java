@@ -44,7 +44,7 @@ public class MovieVault {
             case 3 -> movieStatusEnum = MovieStatus.NO_INTEREST;
         }
 
-        Movie movie = new Movie(movieTitle, movieGenre, movieReleaseYear, movieRating, movieStatusEnum);
+        Movie movie = new Movie(0, movieTitle, movieGenre, movieReleaseYear, movieRating, movieStatusEnum);
         moviesStorage.addToMovies(movie);
         System.out.println(moviesStorage.getMovies());
     }
