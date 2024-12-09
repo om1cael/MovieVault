@@ -1,4 +1,4 @@
-package com.om1cael;
+package com.om1cael.enums;
 
 public enum MovieStatus {
     WATCHED("Watched"),
