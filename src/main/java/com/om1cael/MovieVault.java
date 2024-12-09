@@ -5,7 +5,6 @@ import com.om1cael.models.Movie;
 import com.om1cael.storage.MoviesStorage;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -45,27 +44,27 @@ public class MovieVault {
     public void editMovie() {}
     public void removeMovie() {}
 
-    public void filterByGenre(String genre) {
-         List<Movie> filteredMovies = moviesStorage.getMovies().stream().
+    public List<Movie> filterByGenre() {
+        String genre = inputParser.getTextInput("Genre: ");
+
+        return moviesStorage.getMovies().stream().
                 filter(movie -> movie.genre().equalsIgnoreCase(genre))
                 .toList();
-
-        System.out.println(filteredMovies);
     }
 
-    public void filterByYear(int year) {
-        List<Movie> filteredMovies = moviesStorage.getMovies().stream().
+    public List<Movie> filterByYear() {
+        int year = inputParser.getNumberInput("Year: ", 1800, LocalDate.now().getYear());
+
+        return moviesStorage.getMovies().stream().
                 filter(movie -> movie.releaseYear() == year)
                 .toList();
-
-        System.out.println(filteredMovies);
     }
 
-    public void filterByRating(byte rating) {
-        List<Movie> filteredMovies = moviesStorage.getMovies().stream().
+    public List<Movie> filterByRating() {
+        byte rating = (byte) inputParser.getNumberInput("Rating: ", 0, 5);
+
+        return moviesStorage.getMovies().stream().
                 filter(movie -> movie.rating() == rating)
                 .toList();
-
-        System.out.println(filteredMovies);
     }
 }
