@@ -16,16 +16,17 @@ public final class CommandParser {
             6, ProgramActions.FILTER_BY_RATING
     ));
 
+    private final Scanner scanner;
     private final MovieVault movieVault;
 
-    public CommandParser() {
+    public CommandParser(Scanner scanner) {
         movieVault = new MovieVault();
+        this.scanner = scanner;
     }
 
     public void getInitialInput() {
-        Scanner scanner = new Scanner(System.in);
         showChoices();
-        handleInput(scanner);
+        handleInput(this.scanner);
     }
 
     private void handleInput(Scanner scanner) {
