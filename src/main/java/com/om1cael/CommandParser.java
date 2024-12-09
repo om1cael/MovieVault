@@ -34,6 +34,9 @@ public final class CommandParser {
         switch (choices.get(inputChoice)) {
             case ADD_MOVIE -> movieVault.addMovie();
             case REMOVE_MOVIE -> System.out.println("You choose to remove a movie");
+            case FILTER_BY_GENRE -> System.out.println("Filter by genre");
+            case FILTER_BY_YEAR -> System.out.println("Filter by year");
+            case FILTER_BY_RATING -> System.out.println("Filter by rating");
             default -> System.out.println("Not a valid option.");
         }
     }
