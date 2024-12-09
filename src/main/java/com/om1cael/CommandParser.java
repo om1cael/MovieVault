@@ -1,16 +1,19 @@
 package com.om1cael;
 
+import com.om1cael.enums.ProgramActions;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public final class CommandParser {
-    HashMap<Integer, Actions> choices = new HashMap<>(Map.of(
-            1, Actions.ADD_MOVIE,
-            2, Actions.REMOVE_MOVIE,
-            3, Actions.FILTER_BY_GENRE,
-            4, Actions.FILTER_BY_YEAR,
-            5, Actions.FILTER_BY_RATING
+    HashMap<Integer, ProgramActions> choices = new HashMap<>(Map.of(
+            1, ProgramActions.ADD_MOVIE,
+            2, ProgramActions.EDIT_MOVIE,
+            3, ProgramActions.REMOVE_MOVIE,
+            4, ProgramActions.FILTER_BY_GENRE,
+            5, ProgramActions.FILTER_BY_YEAR,
+            6, ProgramActions.FILTER_BY_RATING
     ));
 
     private final MovieVault movieVault;
@@ -33,7 +36,8 @@ public final class CommandParser {
 
         switch (choices.get(inputChoice)) {
             case ADD_MOVIE -> movieVault.addMovie();
-            case REMOVE_MOVIE -> System.out.println("You choose to remove a movie");
+            case EDIT_MOVIE -> System.out.println("Edit a movie");
+            case REMOVE_MOVIE -> System.out.println("Remove a movie");
             case FILTER_BY_GENRE -> System.out.println("Filter by genre");
             case FILTER_BY_YEAR -> System.out.println("Filter by year");
             case FILTER_BY_RATING -> System.out.println("Filter by rating");
@@ -56,20 +60,3 @@ public final class CommandParser {
     }
 }
 
-enum Actions {
-    ADD_MOVIE("Add a new movie"),
-    REMOVE_MOVIE("Remove a movie"),
-    FILTER_BY_GENRE("Filter by genre"),
-    FILTER_BY_YEAR("Filter by year of release"),
-    FILTER_BY_RATING("Filter by rating");
-
-    private final String description;
-
-    Actions(String description) {
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-}
