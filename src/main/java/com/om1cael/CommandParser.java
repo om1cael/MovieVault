@@ -20,16 +20,21 @@ public final class CommandParser {
         System.out.print("Your choice: ");
         final int inputChoice = scanner.nextInt();
 
-        if(!choices.containsKey(inputChoice)) {
-            System.out.println("This option is not valid.");
-            return;
-        }
+        if (isInputInvalid(inputChoice)) return;
 
         switch (choices.get(inputChoice)) {
             case ADD_MOVIE -> System.out.println("You choose to add a movie");
             case REMOVE_MOVIE -> System.out.println("You choose to remove a movie");
             default -> System.out.println("Not a valid option.");
         }
+    }
+
+    private boolean isInputInvalid(int inputChoice) {
+        if(!choices.containsKey(inputChoice)) {
+            System.out.println("This option is not valid.");
+            return true;
+        }
+        return false;
     }
 
     private void showChoices() {
