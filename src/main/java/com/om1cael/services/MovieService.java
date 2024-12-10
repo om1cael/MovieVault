@@ -24,7 +24,7 @@ public class MovieService {
             default -> MovieStatus.NO_INTEREST;
         };
 
-        Movie movie = new Movie(movieTitle, movieGenre, releaseYear, rating, movieStatus);
+        Movie movie = new Movie(retryMovieID(), movieTitle, movieGenre, releaseYear, rating, movieStatus);
         this.movieStorageService.addToMovies(movie);
         return movie;
     }
@@ -34,19 +34,29 @@ public class MovieService {
 
     public List<Movie> filterByGenre(String genre) {
         return this.movieStorageService.getMovies().stream().
-                filter(movie -> movie.getGenre().equalsIgnoreCase(genre))
+                filter(movie -> movie.genre().equalsIgnoreCase(genre))
                 .toList();
     }
 
     public List<Movie> filterByYear(int year) {
         return this.movieStorageService.getMovies().stream().
-                filter(movie -> movie.getReleaseYear() == year)
+                filter(movie -> movie.releaseYear() == year)
                 .toList();
     }
 
     public List<Movie> filterByRating(byte rating) {
         return this.movieStorageService.getMovies().stream().
-                filter(movie -> movie.getRating() == rating)
+                filter(movie -> movie.rating() == rating)
                 .toList();
+    }
+
+    private int retryMovieID() {
+        List<Movie> movieList = this.movieStorageService.getMovies();
+
+        if(movieList == null) {
+            return 0;
+        } else {
+            return movieList.size();
+        }
     }
 }
