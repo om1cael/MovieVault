@@ -16,7 +16,7 @@ public class InputParser {
 
     public int getNumberInput(String message, int min, int max) {
         System.out.print(message);
-        int inputNumber = scanner.nextInt();
+        int inputNumber = this.scanner.nextInt();
 
         if(inputNumber >= min && inputNumber <= max) {
             return inputNumber;

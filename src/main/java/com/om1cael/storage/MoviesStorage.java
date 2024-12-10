@@ -9,15 +9,13 @@ import java.util.List;
 
 // TODO: The content must be loaded from a JSON or text file.
 public class MoviesStorage {
-    ArrayList<Movie> movies = new ArrayList<>(List.of(
-            new Movie(0, "Game of Thrones", "Politics", 2012, (byte) 5, MovieStatus.WATCHED)
-    ));
+    ArrayList<Movie> movies = new ArrayList<>();
 
     public void addToMovies(Movie movie) {
         this.movies.add(movie);
     }
 
     public ArrayList<Movie> getMovies() {
-        return movies;
+        return this.movies;
     }
 }
