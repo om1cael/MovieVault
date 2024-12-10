@@ -2,7 +2,7 @@ package com.om1cael.services;
 
 import com.om1cael.controller.MovieController;
 import com.om1cael.model.ProgramActions;
-import com.om1cael.view.InputParser;
+import com.om1cael.controller.InputParser;
 
 import java.util.HashMap;
 import java.util.Map;
