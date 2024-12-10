@@ -1,5 +1,7 @@
 package com.om1cael;
 
+import com.om1cael.parsers.CommandParser;
+
 import java.util.Scanner;
 
 public class Main {

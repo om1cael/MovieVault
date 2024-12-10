@@ -1,5 +1,6 @@
-package com.om1cael;
+package com.om1cael.parsers;
 
+import com.om1cael.MovieVault;
 import com.om1cael.enums.ProgramActions;
 
 import java.util.HashMap;

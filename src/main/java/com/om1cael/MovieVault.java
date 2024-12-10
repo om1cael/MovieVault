@@ -2,6 +2,7 @@ package com.om1cael;
 
 import com.om1cael.enums.MovieStatus;
 import com.om1cael.models.Movie;
+import com.om1cael.parsers.InputParser;
 import com.om1cael.storage.MoviesStorage;
 
 import java.time.LocalDate;
