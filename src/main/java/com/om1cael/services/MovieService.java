@@ -25,7 +25,9 @@ public class MovieService {
             default -> MovieStatus.NO_INTEREST;
         };
 
-        return new Movie(0, movieTitle, movieGenre, releaseYear, rating, movieStatus);
+        Movie movie = new Movie(0, movieTitle, movieGenre, releaseYear, rating, movieStatus);
+        this.movieStorageController.addToMovies(movie);
+        return movie;
     }
 
     public void editMovie() {}

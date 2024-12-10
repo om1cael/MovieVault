@@ -43,7 +43,6 @@ public class MovieController {
                 movieStatusChoice
         );
 
-        this.movieStorageController.addToMovies(movie);
         feedbackView.printMovieAdded(movie);
     }
 
