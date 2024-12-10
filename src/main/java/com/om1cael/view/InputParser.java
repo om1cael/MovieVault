@@ -24,4 +24,15 @@ public class InputParser {
 
         return inputNumber < min ? min : max;
     }
+
+    public int getNumberInput(String message, int min, int max, boolean receiveRaw) {
+        System.out.print(message);
+        int inputNumber = this.scanner.nextInt();
+
+        if(receiveRaw || (inputNumber >= min && inputNumber <= max)) {
+            return inputNumber;
+        }
+
+        return inputNumber < min ? min : max;
+    }
 }

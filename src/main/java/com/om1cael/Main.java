@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        MenuView menuView = new MenuView(new InputParser(new Scanner(System.in)), new MovieController());
+        MenuView menuView = new MenuView();
         menuView.getInitialInput();
     }
 }
