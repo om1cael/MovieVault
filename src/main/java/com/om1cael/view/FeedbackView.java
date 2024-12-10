@@ -20,12 +20,12 @@ public class FeedbackView {
     public void printMovieList(List<Movie> movieList) {
         System.out.println("Your movies: ");
         movieList.forEach(movie -> {
-            System.out.println(movie.getTitle());
+            System.out.println();
+            System.out.println(movie.getTitle() + " [ID " + movie.getId() + "]:");
             System.out.println(" - Genre: " + movie.getGenre());
             System.out.println(" - Year of release: " + movie.getReleaseYear());
             System.out.println(" - Your rating: " + movie.getRating());
             System.out.println(" - Status: " + movie.getStatus().getDescription());
-            System.out.println();
         });
     }
 
