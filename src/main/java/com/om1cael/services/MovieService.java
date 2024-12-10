@@ -25,7 +25,7 @@ public class MovieService {
             default -> MovieStatus.NO_INTEREST;
         };
 
-        Movie movie = new Movie(0, movieTitle, movieGenre, releaseYear, rating, movieStatus);
+        Movie movie = new Movie(movieTitle, movieGenre, releaseYear, rating, movieStatus);
         this.movieStorageController.addToMovies(movie);
         return movie;
     }
@@ -35,19 +35,19 @@ public class MovieService {
 
     public List<Movie> filterByGenre(String genre) {
         return this.movieStorageController.getMovies().stream().
-                filter(movie -> movie.genre().equalsIgnoreCase(genre))
+                filter(movie -> movie.getGenre().equalsIgnoreCase(genre))
                 .toList();
     }
 
     public List<Movie> filterByYear(int year) {
         return this.movieStorageController.getMovies().stream().
-                filter(movie -> movie.releaseYear() == year)
+                filter(movie -> movie.getReleaseYear() == year)
                 .toList();
     }
 
     public List<Movie> filterByRating(byte rating) {
         return this.movieStorageController.getMovies().stream().
-                filter(movie -> movie.rating() == rating)
+                filter(movie -> movie.getRating() == rating)
                 .toList();
     }
 }
