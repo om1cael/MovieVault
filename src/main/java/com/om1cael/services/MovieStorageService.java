@@ -1,15 +1,13 @@
-package com.om1cael.controller;
+package com.om1cael.services;
 
 import com.om1cael.model.Movie;
-import com.om1cael.services.StorageService;
 
 import java.util.List;
 
-// TODO: It may be a controller in the future.
-public class MovieStorageController {
+public class MovieStorageService {
     private final StorageService storageService;
 
-    public MovieStorageController() {
+    public MovieStorageService() {
         this.storageService = new StorageService();
     }
 

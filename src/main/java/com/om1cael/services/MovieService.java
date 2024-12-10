@@ -2,15 +2,14 @@ package com.om1cael.services;
 
 import com.om1cael.model.MovieStatus;
 import com.om1cael.model.Movie;
-import com.om1cael.controller.MovieStorageController;
 
 import java.util.List;
 
 public class MovieService {
-    private final MovieStorageController movieStorageController;
+    private final MovieStorageService movieStorageService;
 
     public MovieService() {
-        this.movieStorageController = new MovieStorageController();
+        this.movieStorageService = new MovieStorageService();
     }
 
     public Movie addMovie(String movieTitle,
@@ -26,7 +25,7 @@ public class MovieService {
         };
 
         Movie movie = new Movie(movieTitle, movieGenre, releaseYear, rating, movieStatus);
-        this.movieStorageController.addToMovies(movie);
+        this.movieStorageService.addToMovies(movie);
         return movie;
     }
 
@@ -34,19 +33,19 @@ public class MovieService {
     public void removeMovie() {}
 
     public List<Movie> filterByGenre(String genre) {
-        return this.movieStorageController.getMovies().stream().
+        return this.movieStorageService.getMovies().stream().
                 filter(movie -> movie.getGenre().equalsIgnoreCase(genre))
                 .toList();
     }
 
     public List<Movie> filterByYear(int year) {
-        return this.movieStorageController.getMovies().stream().
+        return this.movieStorageService.getMovies().stream().
                 filter(movie -> movie.getReleaseYear() == year)
                 .toList();
     }
 
     public List<Movie> filterByRating(byte rating) {
-        return this.movieStorageController.getMovies().stream().
+        return this.movieStorageService.getMovies().stream().
                 filter(movie -> movie.getRating() == rating)
                 .toList();
     }

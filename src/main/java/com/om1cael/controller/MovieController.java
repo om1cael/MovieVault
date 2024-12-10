@@ -2,6 +2,7 @@ package com.om1cael.controller;
 
 import com.om1cael.model.Movie;
 import com.om1cael.services.MovieService;
+import com.om1cael.services.MovieStorageService;
 import com.om1cael.view.FeedbackView;
 
 import java.time.LocalDate;
@@ -11,11 +12,11 @@ import java.util.Scanner;
 public class MovieController {
     private final MovieService movieService;
     private final InputParser inputParser;
-    private final MovieStorageController movieStorageController;
+    private final MovieStorageService movieStorageService;
     private final FeedbackView feedbackView;
 
     public MovieController() {
-        this.movieStorageController = new MovieStorageController();
+        this.movieStorageService = new MovieStorageService();
         this.inputParser = new InputParser(new Scanner(System.in));
 
         this.movieService = new MovieService();
