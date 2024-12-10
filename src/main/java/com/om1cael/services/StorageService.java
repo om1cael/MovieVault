@@ -42,6 +42,26 @@ public class StorageService {
         }
     }
 
+    public void saveToFile(List<Movie> moviesToAdd) {
+        Gson gson = new Gson();
+
+        try(BufferedWriter writer = Files.newBufferedWriter(storagePath);
+            JsonWriter jsonWriter = new JsonWriter(writer)
+        ) {
+            jsonWriter.beginArray();
+
+            if(moviesToAdd != null) {
+                for(Movie movie : moviesToAdd) {
+                    gson.toJson(movie, Movie.class, jsonWriter);
+                }
+            }
+
+            jsonWriter.endArray();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Movie> readFromFile() {
         Gson gson = new Gson();
         List<Movie> movieList;

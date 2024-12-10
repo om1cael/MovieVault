@@ -15,9 +15,11 @@ public class MovieStorageService {
         this.storageService.saveToFile(movie);
     }
 
+    public void addToMovies(List<Movie> movies) {
+        this.storageService.saveToFile(movies);
+    }
+
     public List<Movie> getMovies() {
         return this.storageService.readFromFile();
     }
-
-
 }

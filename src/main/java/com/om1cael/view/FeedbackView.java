@@ -6,7 +6,15 @@ import java.util.List;
 
 public class FeedbackView {
     public void printMovieAdded(Movie movie) {
-        System.out.println("You added the movie: " + movie.title());
+        System.out.println("You added the movie: " + movie.getTitle());
+    }
+
+    public void printMovieRemoved(Movie movie) {
+        System.out.println("You removed the movie: " + movie.getTitle());
+    }
+
+    public void printMovieNotRemoved() {
+        System.out.println("The movie was not found.");
     }
 
     public void printFilterFeedback(List<Movie> filteredList,
@@ -15,7 +23,7 @@ public class FeedbackView {
         if(filteredList.isEmpty()) System.out.println("Could not find any movie with this filter.");
         else {
             System.out.println(successfulMessage);
-            filteredList.forEach(movie -> System.out.println(" - " + movie.title()));
+            filteredList.forEach(movie -> System.out.println(" - " + movie.getTitle()));
         }
     }
 }

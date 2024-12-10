@@ -48,7 +48,18 @@ public class MovieController {
     }
 
     public void editMovie() {}
-    public void removeMovie() {}
+
+    public void removeMovie() {
+        int id = this.inputParser.getNumberInput("Movie ID: ", 0, Integer.MAX_VALUE, true);
+
+        Movie removedMovie = this.movieService.removeMovie(id);
+        if(removedMovie != null) {
+            feedbackView.printMovieRemoved(removedMovie);
+            return;
+        }
+
+        feedbackView.printMovieNotRemoved();
+    }
 
     public void filterByGenre() {
         String genre = this.inputParser.getTextInput("Genre: ");

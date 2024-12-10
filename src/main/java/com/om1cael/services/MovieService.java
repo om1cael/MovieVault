@@ -3,6 +3,7 @@ package com.om1cael.services;
 import com.om1cael.model.MovieStatus;
 import com.om1cael.model.Movie;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieService {
@@ -30,23 +31,53 @@ public class MovieService {
     }
 
     public void editMovie() {}
-    public void removeMovie() {}
+
+    public Movie removeMovie(int id) {
+        List<Movie> movieList = this.movieStorageService.getMovies();
+        List<Movie> modifiedMovieList;
+        if(movieList == null || id > movieList.size()) return null;
+
+        if(movieList.get(id) != null) {
+            Movie movie = movieList.get(id);
+            movieList.remove(id);
+
+            modifiedMovieList = assignIDAfterRemoval(movieList);
+            this.movieStorageService.addToMovies(modifiedMovieList);
+            return movie;
+        }
+
+        return null;
+    }
+
+    private List<Movie> assignIDAfterRemoval(List<Movie> movieList) {
+        List<Movie> modifiedMovieList = new ArrayList<>();
+
+        int index = 0;
+        for(Movie movieInList : movieList) {
+            movieInList.setId(index);
+            index++;
+
+            modifiedMovieList.add(movieInList);
+        }
+
+        return modifiedMovieList;
+    }
 
     public List<Movie> filterByGenre(String genre) {
         return this.movieStorageService.getMovies().stream().
-                filter(movie -> movie.genre().equalsIgnoreCase(genre))
+                filter(movie -> movie.getGenre().equalsIgnoreCase(genre))
                 .toList();
     }
 
     public List<Movie> filterByYear(int year) {
         return this.movieStorageService.getMovies().stream().
-                filter(movie -> movie.releaseYear() == year)
+                filter(movie -> movie.getReleaseYear() == year)
                 .toList();
     }
 
     public List<Movie> filterByRating(byte rating) {
         return this.movieStorageService.getMovies().stream().
-                filter(movie -> movie.rating() == rating)
+                filter(movie -> movie.getRating() == rating)
                 .toList();
     }
 
