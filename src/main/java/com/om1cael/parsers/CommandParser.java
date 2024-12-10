@@ -17,12 +17,12 @@ public final class CommandParser {
             6, ProgramActions.FILTER_BY_RATING
     ));
 
-    private final Scanner scanner;
+    private final InputParser inputParser;
     private final MovieVault movieVault;
 
-    public CommandParser(Scanner scanner, MovieVault movieVault) {
+    public CommandParser(InputParser inputParser, MovieVault movieVault) {
+        this.inputParser = inputParser;
         this.movieVault = movieVault;
-        this.scanner = scanner;
     }
 
     public void getInitialInput() {
@@ -31,11 +31,16 @@ public final class CommandParser {
     }
 
     private void handleInput() {
-        System.out.print("Your choice: ");
-        final int inputChoice = this.scanner.nextInt();
+        final int inputChoice = inputParser.getNumberInput(
+                "Your choice: ",
+                1,
+                choices.size());
 
         if (isInputInvalid(inputChoice)) return;
+        handleActions(inputChoice);
+    }
 
+    private void handleActions(int inputChoice) {
         switch (choices.get(inputChoice)) {
             case ADD_MOVIE -> movieVault.addMovie();
             case EDIT_MOVIE -> movieVault.editMovie();
