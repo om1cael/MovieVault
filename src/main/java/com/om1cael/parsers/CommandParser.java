@@ -20,8 +20,8 @@ public final class CommandParser {
     private final Scanner scanner;
     private final MovieVault movieVault;
 
-    public CommandParser(Scanner scanner) {
-        this.movieVault = new MovieVault();
+    public CommandParser(Scanner scanner, MovieVault movieVault) {
+        this.movieVault = movieVault;
         this.scanner = scanner;
     }
 
