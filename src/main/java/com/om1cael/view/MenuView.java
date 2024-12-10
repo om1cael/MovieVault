@@ -1,12 +1,16 @@
-package com.om1cael.parsers;
+package com.om1cael.view;
 
+import com.om1cael.controller.InputParser;
 import com.om1cael.services.MovieVault;
-import com.om1cael.enums.ProgramActions;
+import com.om1cael.model.ProgramActions;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public final class CommandParser {
+public final class MenuView {
+    private final InputParser inputParser;
+    private final MovieVault movieVault;
+
     private final HashMap<Integer, ProgramActions> choices = new HashMap<>(Map.of(
             1, ProgramActions.ADD_MOVIE,
             2, ProgramActions.EDIT_MOVIE,
@@ -16,10 +20,7 @@ public final class CommandParser {
             6, ProgramActions.FILTER_BY_RATING
     ));
 
-    private final InputParser inputParser;
-    private final MovieVault movieVault;
-
-    public CommandParser(InputParser inputParser, MovieVault movieVault) {
+    public MenuView(InputParser inputParser, MovieVault movieVault) {
         this.inputParser = inputParser;
         this.movieVault = movieVault;
     }
@@ -30,10 +31,8 @@ public final class CommandParser {
     }
 
     private void handleInput() {
-        final int inputChoice = inputParser.getNumberInput(
-                "Your choice: ",
-                1,
-                choices.size());
+        System.out.print("Your choice: ");
+        final int inputChoice = inputParser.getNumberInput(1, choices.size());
 
         if (isInputInvalid(inputChoice)) return;
         handleActions(inputChoice);

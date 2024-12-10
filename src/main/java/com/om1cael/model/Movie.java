@@ -1,6 +1,4 @@
-package com.om1cael.models;
-
-import com.om1cael.enums.MovieStatus;
+package com.om1cael.model;
 
 public record Movie(int id, String title, String genre, int releaseYear, byte rating, MovieStatus status) {}
 

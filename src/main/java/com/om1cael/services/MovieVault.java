@@ -1,9 +1,9 @@
 package com.om1cael.services;
 
-import com.om1cael.enums.MovieStatus;
-import com.om1cael.models.Movie;
-import com.om1cael.parsers.InputParser;
-import com.om1cael.storage.MoviesStorage;
+import com.om1cael.model.MovieStatus;
+import com.om1cael.model.Movie;
+import com.om1cael.controller.InputParser;
+import com.om1cael.controller.MovieStorageController;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,10 +13,10 @@ import java.util.Scanner;
 // TODO: Any logic here must be managed in another class.
 public class MovieVault {
     private final InputParser inputParser;
-    private final MoviesStorage moviesStorage;
+    private final MovieStorageController movieStorageController;
 
     public MovieVault() {
-        this.moviesStorage = new MoviesStorage();
+        this.movieStorageController = new MovieStorageController();
         this.inputParser = new InputParser(new Scanner(System.in));
     }
 
@@ -39,7 +39,7 @@ public class MovieVault {
         };
 
         Movie movie = new Movie(0, movieTitle, movieGenre, releaseYear, rating, movieStatus);
-        this.moviesStorage.addToMovies(movie);
+        this.movieStorageController.addToMovies(movie);
 
         System.out.println("You added the movie " + movie.title());
     }
@@ -49,7 +49,7 @@ public class MovieVault {
 
     public void filterByGenre() {
         String genre = this.inputParser.getTextInput("Genre: ");
-        List<Movie> filteredList = this.moviesStorage.getMovies().stream().
+        List<Movie> filteredList = this.movieStorageController.getMovies().stream().
                 filter(movie -> movie.genre().equalsIgnoreCase(genre))
                 .toList();
 
@@ -62,7 +62,7 @@ public class MovieVault {
 
     public void filterByYear() {
         int year = this.inputParser.getNumberInput("Year: ", 1800, LocalDate.now().getYear());
-        List<Movie> filteredList = this.moviesStorage.getMovies().stream().
+        List<Movie> filteredList = this.movieStorageController.getMovies().stream().
                 filter(movie -> movie.releaseYear() == year)
                 .toList();
 
@@ -75,7 +75,7 @@ public class MovieVault {
 
     public void filterByRating() {
         byte rating = (byte) this.inputParser.getNumberInput("Rating: ", 0, 5);
-        List<Movie> filteredList = this.moviesStorage.getMovies().stream().
+        List<Movie> filteredList = this.movieStorageController.getMovies().stream().
                 filter(movie -> movie.rating() == rating)
                 .toList();
 

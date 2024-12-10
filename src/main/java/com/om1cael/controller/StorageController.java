@@ -1,10 +1,10 @@
-package com.om1cael.storage;
+package com.om1cael.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.om1cael.models.Movie;
+import com.om1cael.model.Movie;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,10 +13,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class StorageHandler {
+public class StorageController {
     private final Path storagePath = Path.of("movies.json");
 
-    public StorageHandler() {
+    public StorageController() {
         this.createJsonFile();
     }
 

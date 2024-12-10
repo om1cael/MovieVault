@@ -1,4 +1,4 @@
-package com.om1cael.parsers;
+package com.om1cael.controller;
 
 import java.util.Scanner;
 
@@ -9,13 +9,11 @@ public class InputParser {
         this.scanner = scanner;
     }
 
-    public String getTextInput(String message) {
-        System.out.print(message);
+    public String getTextInput() {
         return this.scanner.nextLine();
     }
 
-    public int getNumberInput(String message, int min, int max) {
-        System.out.print(message);
+    public int getNumberInput(int min, int max) {
         int inputNumber = this.scanner.nextInt();
 
         if(inputNumber >= min && inputNumber <= max) {
