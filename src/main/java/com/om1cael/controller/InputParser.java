@@ -9,11 +9,13 @@ public class InputParser {
         this.scanner = scanner;
     }
 
-    public String getTextInput() {
+    public String getTextInput(String message) {
+        System.out.print(message);
         return this.scanner.nextLine();
     }
 
-    public int getNumberInput(int min, int max) {
+    public int getNumberInput(String message, int min, int max) {
+        System.out.print(message);
         int inputNumber = this.scanner.nextInt();
 
         if(inputNumber >= min && inputNumber <= max) {

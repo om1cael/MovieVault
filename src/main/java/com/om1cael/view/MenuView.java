@@ -1,7 +1,8 @@
 package com.om1cael.view;
 
 import com.om1cael.controller.InputParser;
-import com.om1cael.services.MovieVault;
+import com.om1cael.controller.MovieController;
+import com.om1cael.services.MovieService;
 import com.om1cael.model.ProgramActions;
 
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 public final class MenuView {
     private final InputParser inputParser;
-    private final MovieVault movieVault;
+    private final MovieController movieController;
 
     private final HashMap<Integer, ProgramActions> choices = new HashMap<>(Map.of(
             1, ProgramActions.ADD_MOVIE,
@@ -20,9 +21,9 @@ public final class MenuView {
             6, ProgramActions.FILTER_BY_RATING
     ));
 
-    public MenuView(InputParser inputParser, MovieVault movieVault) {
+    public MenuView(InputParser inputParser, MovieController movieController) {
         this.inputParser = inputParser;
-        this.movieVault = movieVault;
+        this.movieController = movieController;
     }
 
     public void getInitialInput() {
@@ -31,8 +32,7 @@ public final class MenuView {
     }
 
     private void handleInput() {
-        System.out.print("Your choice: ");
-        final int inputChoice = inputParser.getNumberInput(1, choices.size());
+        final int inputChoice = inputParser.getNumberInput("Your choice: ", 1, choices.size());
 
         if (isInputInvalid(inputChoice)) return;
         handleActions(inputChoice);
@@ -40,12 +40,12 @@ public final class MenuView {
 
     private void handleActions(int inputChoice) {
         switch (choices.get(inputChoice)) {
-            case ADD_MOVIE -> movieVault.addMovie();
-            case EDIT_MOVIE -> movieVault.editMovie();
-            case REMOVE_MOVIE -> movieVault.removeMovie();
-            case FILTER_BY_GENRE -> movieVault.filterByGenre();
-            case FILTER_BY_YEAR -> movieVault.filterByYear();
-            case FILTER_BY_RATING -> movieVault.filterByRating();
+            case ADD_MOVIE -> movieController.addMovie();
+            case EDIT_MOVIE -> movieController.editMovie();
+            case REMOVE_MOVIE -> movieController.removeMovie();
+            case FILTER_BY_GENRE -> movieController.filterByGenre();
+            case FILTER_BY_YEAR -> movieController.filterByYear();
+            case FILTER_BY_RATING -> movieController.filterByRating();
             default -> System.out.println("Not a valid option.");
         }
     }
