@@ -34,15 +34,14 @@ public class MovieService {
 
     public Movie removeMovie(int id) {
         List<Movie> movieList = this.movieStorageService.getMovies();
-        List<Movie> modifiedMovieList;
         if(movieList == null || id > movieList.size()) return null;
 
         if(movieList.get(id) != null) {
             Movie movie = movieList.get(id);
             movieList.remove(id);
 
-            modifiedMovieList = assignIDAfterRemoval(movieList);
-            this.movieStorageService.addToMovies(modifiedMovieList);
+            movieList = assignIDAfterRemoval(movieList);
+            this.movieStorageService.addToMovies(movieList);
             return movie;
         }
 
