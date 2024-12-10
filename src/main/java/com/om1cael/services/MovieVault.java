@@ -1,4 +1,4 @@
-package com.om1cael;
+package com.om1cael.services;
 
 import com.om1cael.enums.MovieStatus;
 import com.om1cael.models.Movie;

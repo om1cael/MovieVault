@@ -2,6 +2,7 @@ package com.om1cael;
 
 import com.om1cael.parsers.CommandParser;
 import com.om1cael.parsers.InputParser;
+import com.om1cael.services.MovieVault;
 
 import java.util.Scanner;
 

@@ -1,11 +1,10 @@
 package com.om1cael.parsers;
 
-import com.om1cael.MovieVault;
+import com.om1cael.services.MovieVault;
 import com.om1cael.enums.ProgramActions;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public final class CommandParser {
     private final HashMap<Integer, ProgramActions> choices = new HashMap<>(Map.of(
