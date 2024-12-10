@@ -9,7 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-// TODO: Move input handling to another class
+// TODO: This class should handle only the "frontend" of the program.
+// TODO: Any logic here must be managed in another class.
 public class MovieVault {
     private final InputParser inputParser;
     private final MoviesStorage moviesStorage;
@@ -39,32 +40,49 @@ public class MovieVault {
 
         Movie movie = new Movie(0, movieTitle, movieGenre, releaseYear, rating, movieStatus);
         this.moviesStorage.addToMovies(movie);
+
+        System.out.println("You added the movie " + movie.title());
     }
 
     public void editMovie() {}
     public void removeMovie() {}
 
-    public List<Movie> filterByGenre() {
+    public void filterByGenre() {
         String genre = this.inputParser.getTextInput("Genre: ");
-
-        return this.moviesStorage.getMovies().stream().
+        List<Movie> filteredList = this.moviesStorage.getMovies().stream().
                 filter(movie -> movie.genre().equalsIgnoreCase(genre))
                 .toList();
+
+        if(filteredList.isEmpty()) System.out.println("No movies with that genre.");
+        else {
+            System.out.println("List of movies with genre " + genre);
+            filteredList.forEach(movie -> System.out.println(" - " + movie.title()));
+        }
     }
 
-    public List<Movie> filterByYear() {
+    public void filterByYear() {
         int year = this.inputParser.getNumberInput("Year: ", 1800, LocalDate.now().getYear());
-
-        return this.moviesStorage.getMovies().stream().
+        List<Movie> filteredList = this.moviesStorage.getMovies().stream().
                 filter(movie -> movie.releaseYear() == year)
                 .toList();
+
+        if(filteredList.isEmpty()) System.out.println("No movies released in that year.");
+        else {
+            System.out.println("List of movies released in that year (" + year + ")");
+            filteredList.forEach(movie -> System.out.println(" - " + movie.title()));
+        }
     }
 
-    public List<Movie> filterByRating() {
+    public void filterByRating() {
         byte rating = (byte) this.inputParser.getNumberInput("Rating: ", 0, 5);
-
-        return this.moviesStorage.getMovies().stream().
+        List<Movie> filteredList = this.moviesStorage.getMovies().stream().
                 filter(movie -> movie.rating() == rating)
                 .toList();
+
+        if(filteredList.isEmpty()) System.out.println("No movies with that rating.");
+        else {
+            System.out.println("List of movies with " + rating + " rating");
+            filteredList.forEach(movie -> System.out.println(" - " + movie.title()));
+        }
     }
 }
