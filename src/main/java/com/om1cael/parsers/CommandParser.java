@@ -61,8 +61,8 @@ public final class CommandParser {
     }
 
     private void showChoices() {
-        this.choices.forEach((k, v) -> {
-            System.out.println("[" + k + "]: " + v.getDescription());
+        this.choices.forEach((actionNumber, action) -> {
+            System.out.println("[" + actionNumber + "]: " + action.getDescription());
         });
     }
 }
