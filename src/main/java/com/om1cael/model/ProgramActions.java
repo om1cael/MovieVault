@@ -1,4 +1,4 @@
-package com.om1cael.enums;
+package com.om1cael.model;
 
 public enum ProgramActions {
     ADD_MOVIE("Add a new movie"),
