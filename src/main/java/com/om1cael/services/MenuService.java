@@ -14,11 +14,12 @@ public class MenuService {
 
     private final HashMap<Integer, ProgramActions> choices = new HashMap<>(Map.of(
             1, ProgramActions.ADD_MOVIE,
-            2, ProgramActions.EDIT_MOVIE,
-            3, ProgramActions.REMOVE_MOVIE,
-            4, ProgramActions.FILTER_BY_GENRE,
-            5, ProgramActions.FILTER_BY_YEAR,
-            6, ProgramActions.FILTER_BY_RATING
+            2, ProgramActions.LIST_MOVIES,
+            3, ProgramActions.EDIT_MOVIE,
+            4, ProgramActions.REMOVE_MOVIE,
+            5, ProgramActions.FILTER_BY_GENRE,
+            6, ProgramActions.FILTER_BY_YEAR,
+            7, ProgramActions.FILTER_BY_RATING
     ));
 
     public MenuService() {
@@ -37,6 +38,7 @@ public class MenuService {
     private void handleActions(int inputChoice) {
         switch (choices.get(inputChoice)) {
             case ADD_MOVIE -> movieController.addMovie();
+            case LIST_MOVIES -> movieController.listMovies();
             case EDIT_MOVIE -> movieController.editMovie();
             case REMOVE_MOVIE -> movieController.removeMovie();
             case FILTER_BY_GENRE -> movieController.filterByGenre();

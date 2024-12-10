@@ -2,6 +2,7 @@ package com.om1cael.model;
 
 public enum ProgramActions {
     ADD_MOVIE("Add a new movie"),
+    LIST_MOVIES("List your movies"),
     EDIT_MOVIE("Edit a movie"),
     REMOVE_MOVIE("Remove a movie"),
     FILTER_BY_GENRE("Filter by genre"),

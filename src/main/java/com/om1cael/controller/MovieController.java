@@ -47,6 +47,16 @@ public class MovieController {
         feedbackView.printMovieAdded(movie);
     }
 
+    public void listMovies() {
+        List<Movie> movieList = this.movieStorageService.getMovies();
+        if(movieList == null) {
+            feedbackView.printNoMovies();
+            return;
+        }
+
+        feedbackView.printMovieList(movieList);
+    }
+
     public void editMovie() {}
 
     public void removeMovie() {
