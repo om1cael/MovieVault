@@ -1,4 +1,4 @@
-package com.om1cael.controller;
+package com.om1cael.view;
 
 import java.util.Scanner;
 

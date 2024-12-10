@@ -2,8 +2,7 @@ package com.om1cael;
 
 import com.om1cael.controller.MovieController;
 import com.om1cael.view.MenuView;
-import com.om1cael.controller.InputParser;
-import com.om1cael.services.MovieService;
+import com.om1cael.view.InputParser;
 
 import java.util.Scanner;
 

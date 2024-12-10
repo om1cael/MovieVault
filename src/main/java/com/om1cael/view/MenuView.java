@@ -1,8 +1,6 @@
 package com.om1cael.view;
 
-import com.om1cael.controller.InputParser;
 import com.om1cael.controller.MovieController;
-import com.om1cael.services.MovieService;
 import com.om1cael.model.ProgramActions;
 
 import java.util.HashMap;

@@ -1,9 +1,9 @@
 package com.om1cael.controller;
 
-import com.om1cael.model.MovieStatus;
 import com.om1cael.model.Movie;
 import com.om1cael.services.MovieService;
 import com.om1cael.view.FeedbackView;
+import com.om1cael.view.InputParser;
 
 import java.time.LocalDate;
 import java.util.List;
