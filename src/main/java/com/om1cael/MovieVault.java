@@ -38,7 +38,6 @@ public class MovieVault {
 
         Movie movie = new Movie(0, movieTitle, movieGenre, releaseYear, rating, movieStatus);
         moviesStorage.addToMovies(movie);
-        System.out.println(moviesStorage.getMovies());
     }
 
     public void editMovie() {}
