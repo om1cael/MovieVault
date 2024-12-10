@@ -1,4 +1,4 @@
-package com.om1cael.controller;
+package com.om1cael.services;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,10 +13,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class StorageController {
+public class StorageService {
     private final Path storagePath = Path.of("movies.json");
 
-    public StorageController() {
+    public StorageService() {
         this.createJsonFile();
     }
 
