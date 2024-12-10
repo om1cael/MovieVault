@@ -10,21 +10,21 @@ import java.util.Scanner;
 
 // TODO: Move input handling to another class
 public class MovieVault {
-    InputParser inputParser;
-    MoviesStorage moviesStorage;
+    private final InputParser inputParser;
+    private final MoviesStorage moviesStorage;
 
     public MovieVault() {
-        moviesStorage = new MoviesStorage();
-        inputParser = new InputParser(new Scanner(System.in));
+        this.moviesStorage = new MoviesStorage();
+        this.inputParser = new InputParser(new Scanner(System.in));
     }
 
     public void addMovie() {
         System.out.println("Adding a new movie!");
-        String movieTitle = inputParser.getTextInput(" - Title: ");
-        String movieGenre = inputParser.getTextInput(" - Genre: ");
-        int releaseYear = inputParser.getNumberInput(" - Release year: ", 1800, LocalDate.now().getYear());
-        byte rating = (byte)inputParser.getNumberInput(" - Rating (0-5): ", 0, 5);
-        int movieStatusChoice = inputParser.getNumberInput(
+        String movieTitle = this.inputParser.getTextInput(" - Title: ");
+        String movieGenre = this.inputParser.getTextInput(" - Genre: ");
+        int releaseYear = this.inputParser.getNumberInput(" - Release year: ", 1800, LocalDate.now().getYear());
+        byte rating = (byte)this.inputParser.getNumberInput(" - Rating (0-5): ", 0, 5);
+        int movieStatusChoice = this.inputParser.getNumberInput(
                 " - Status (1 - Watched, 2 - To watch, 3 - Not interested in): ",
                 1,
                 3
@@ -37,32 +37,32 @@ public class MovieVault {
         };
 
         Movie movie = new Movie(0, movieTitle, movieGenre, releaseYear, rating, movieStatus);
-        moviesStorage.addToMovies(movie);
+        this.moviesStorage.addToMovies(movie);
     }
 
     public void editMovie() {}
     public void removeMovie() {}
 
     public List<Movie> filterByGenre() {
-        String genre = inputParser.getTextInput("Genre: ");
+        String genre = this.inputParser.getTextInput("Genre: ");
 
-        return moviesStorage.getMovies().stream().
+        return this.moviesStorage.getMovies().stream().
                 filter(movie -> movie.genre().equalsIgnoreCase(genre))
                 .toList();
     }
 
     public List<Movie> filterByYear() {
-        int year = inputParser.getNumberInput("Year: ", 1800, LocalDate.now().getYear());
+        int year = this.inputParser.getNumberInput("Year: ", 1800, LocalDate.now().getYear());
 
-        return moviesStorage.getMovies().stream().
+        return this.moviesStorage.getMovies().stream().
                 filter(movie -> movie.releaseYear() == year)
                 .toList();
     }
 
     public List<Movie> filterByRating() {
-        byte rating = (byte) inputParser.getNumberInput("Rating: ", 0, 5);
+        byte rating = (byte) this.inputParser.getNumberInput("Rating: ", 0, 5);
 
-        return moviesStorage.getMovies().stream().
+        return this.moviesStorage.getMovies().stream().
                 filter(movie -> movie.rating() == rating)
                 .toList();
     }

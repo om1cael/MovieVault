@@ -5,7 +5,7 @@ import com.om1cael.models.Movie;
 import java.util.List;
 
 public class MoviesStorage {
-    StorageHandler storageHandler;
+    private final StorageHandler storageHandler;
 
     public MoviesStorage() {
         this.storageHandler = new StorageHandler();

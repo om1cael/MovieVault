@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public final class CommandParser {
-    HashMap<Integer, ProgramActions> choices = new HashMap<>(Map.of(
+    private final HashMap<Integer, ProgramActions> choices = new HashMap<>(Map.of(
             1, ProgramActions.ADD_MOVIE,
             2, ProgramActions.EDIT_MOVIE,
             3, ProgramActions.REMOVE_MOVIE,
@@ -20,18 +20,18 @@ public final class CommandParser {
     private final MovieVault movieVault;
 
     public CommandParser(Scanner scanner) {
-        movieVault = new MovieVault();
+        this.movieVault = new MovieVault();
         this.scanner = scanner;
     }
 
     public void getInitialInput() {
         showChoices();
-        handleInput(this.scanner);
+        handleInput();
     }
 
-    private void handleInput(Scanner scanner) {
+    private void handleInput() {
         System.out.print("Your choice: ");
-        final int inputChoice = scanner.nextInt();
+        final int inputChoice = this.scanner.nextInt();
 
         if (isInputInvalid(inputChoice)) return;
 
@@ -55,7 +55,7 @@ public final class CommandParser {
     }
 
     private void showChoices() {
-        choices.forEach((k, v) -> {
+        this.choices.forEach((k, v) -> {
             System.out.println("[" + k + "]: " + v.getDescription());
         });
     }
