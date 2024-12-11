@@ -72,7 +72,7 @@ public class StorageService {
             TypeToken<List<Movie>> movieListType = new TypeToken<>(){};
             movieList = gson.fromJson(jsonReader, movieListType);
         } catch (IOException e) {
-            throw new RuntimeException("It was not possible to read the file.");
+            throw new RuntimeException("It was not possible to read the movies file.");
         }
 
         return movieList;
@@ -80,14 +80,10 @@ public class StorageService {
 
     private void createJsonFile() {
         try {
-            if(!storageFileExists())
+            if(!Files.exists(storagePath))
                 Files.createFile(storagePath);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private boolean storageFileExists() {
-        return Files.exists(storagePath);
     }
 }
