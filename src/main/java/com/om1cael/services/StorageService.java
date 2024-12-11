@@ -38,7 +38,7 @@ public class StorageService {
             gson.toJson(movieToAdd, Movie.class, jsonWriter);
             jsonWriter.endArray();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("It was not possible to save the movies into the storage");
         }
     }
 
@@ -58,7 +58,7 @@ public class StorageService {
 
             jsonWriter.endArray();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("It was not possible to save the movies into the storage");
         }
     }
 
@@ -72,7 +72,7 @@ public class StorageService {
             TypeToken<List<Movie>> movieListType = new TypeToken<>(){};
             movieList = gson.fromJson(jsonReader, movieListType);
         } catch (IOException e) {
-            throw new RuntimeException("It was not possible to read the movies file.");
+            throw new RuntimeException("It was not possible to read the movie storage.");
         }
 
         return movieList;
