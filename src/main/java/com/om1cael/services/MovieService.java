@@ -96,15 +96,12 @@ public class MovieService {
 
     private MovieStatus mapMovieStatus(String content) {
         int contentIndex = Integer.parseInt(content);
-        MovieStatus movieStatus;
 
-        switch(contentIndex) {
-            case 0 -> movieStatus = MovieStatus.WATCHED;
-            case 1 -> movieStatus = MovieStatus.TO_WATCH;
-            default -> movieStatus = MovieStatus.NO_INTEREST;
-        }
-
-        return movieStatus;
+        return switch(contentIndex) {
+            case 0 -> MovieStatus.WATCHED;
+            case 1 -> MovieStatus.TO_WATCH;
+            default -> MovieStatus.NO_INTEREST;
+        };
     }
 
     private List<Movie> assignIDAfterRemoval(List<Movie> movieList) {
