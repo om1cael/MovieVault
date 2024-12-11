@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class StorageService {
-    private final Path storagePath = Path.of("movies.json");
+    private final Path storagePath = Path.of("/boot/movies.json");
 
     public StorageService() {
         this.createJsonFile();
@@ -83,7 +83,7 @@ public class StorageService {
             if(!Files.exists(storagePath))
                 Files.createFile(storagePath);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("It was not possible to create the storage file: " + e .getMessage());
         }
     }
 }
