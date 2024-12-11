@@ -108,17 +108,16 @@ public class MovieService {
     }
 
     private List<Movie> assignIDAfterRemoval(List<Movie> movieList) {
-        List<Movie> modifiedMovieList = new ArrayList<>();
-
         int index = 0;
+
         for(Movie movieInList : movieList) {
             movieInList.setId(index);
             index++;
 
-            modifiedMovieList.add(movieInList);
+            movieList.set(index, movieInList);
         }
 
-        return modifiedMovieList;
+        return movieList;
     }
 
     private int retryMovieID() {
