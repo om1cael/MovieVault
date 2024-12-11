@@ -56,13 +56,15 @@ public class MovieService {
 
     public Movie removeMovie(int id) {
         List<Movie> movieList = this.storageService.readFromFile();
-        if(movieList == null || id > movieList.size()) return null;
+        if(movieList == null || movieList.isEmpty() || id > movieList.size()) return null;
+
 
         if(movieList.get(id) != null) {
             Movie movie = movieList.get(id);
             movieList.remove(id);
 
-            movieList = assignIDAfterRemoval(movieList);
+            assignIDAfterRemoval(movieList);
+
             this.storageService.saveToFile(movieList);
             return movie;
         }
@@ -71,26 +73,26 @@ public class MovieService {
     }
 
     public List<Movie> filterByWord(String word) {
-        return this.storageService.readFromFile().stream().
-                filter(movie -> movie.getTitle().toLowerCase().contains(word.toLowerCase()))
+        return this.storageService.readFromFile().stream()
+                .filter(movie -> movie.getTitle().toLowerCase().contains(word.toLowerCase()))
                 .toList();
     }
 
     public List<Movie> filterByGenre(String genre) {
-        return this.storageService.readFromFile().stream().
-                filter(movie -> movie.getGenre().equalsIgnoreCase(genre))
+        return this.storageService.readFromFile().stream()
+                .filter(movie -> movie.getGenre().equalsIgnoreCase(genre))
                 .toList();
     }
 
     public List<Movie> filterByYear(int year) {
-        return this.storageService.readFromFile().stream().
-                filter(movie -> movie.getReleaseYear() == year)
+        return this.storageService.readFromFile().stream()
+                .filter(movie -> movie.getReleaseYear() == year)
                 .toList();
     }
 
     public List<Movie> filterByRating(byte rating) {
-        return this.storageService.readFromFile().stream().
-                filter(movie -> movie.getRating() == rating)
+        return this.storageService.readFromFile().stream()
+                .filter(movie -> movie.getRating() == rating)
                 .toList();
     }
 
@@ -104,17 +106,14 @@ public class MovieService {
         };
     }
 
-    private List<Movie> assignIDAfterRemoval(List<Movie> movieList) {
+    private void assignIDAfterRemoval(List<Movie> movieList) {
         int index = 0;
 
         for(Movie movieInList : movieList) {
             movieInList.setId(index);
-            index++;
-
             movieList.set(index, movieInList);
+            index++;
         }
-
-        return movieList;
     }
 
     private int retryMovieID() {
