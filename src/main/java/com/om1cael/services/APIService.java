@@ -45,6 +45,9 @@ public class APIService {
                 }
 
                 return response.body();
+            }).exceptionally(e -> {
+                System.err.println("An error occurred while parsing your movies: " + e.getMessage());
+                return "[]";
             });
         } catch (UncheckedIOException e) {
             throw new RuntimeException("Could not create the HTTP Client: " + e.getMessage());
@@ -54,7 +57,11 @@ public class APIService {
     public CompletableFuture<APIMovie> mapToJson(String title) {
         Gson gson = new Gson();
         return this.fetchAPI(title)
-                .thenApply(response -> gson.fromJson(response, APIMovie.class));
+                .thenApply(response -> gson.fromJson(response, APIMovie.class))
+                .exceptionally(e -> {
+                    System.err.println("An error occurred while preparing your movies data: " + e.getMessage());
+                    return null;
+                });
     }
 
     private String getFormattedMovieTitle(String movieTitle) {

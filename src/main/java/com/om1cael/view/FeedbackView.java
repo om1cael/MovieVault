@@ -14,7 +14,7 @@ public class FeedbackView {
         System.out.println("You removed the movie: " + movie.getTitle());
     }
 
-    public void printMovieNotRemoved() {
+    public void printMovieNotFound() {
         System.out.println("The movie was not found.");
     }
 

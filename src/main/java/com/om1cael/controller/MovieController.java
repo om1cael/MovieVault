@@ -67,6 +67,11 @@ public class MovieController {
 
         for(Movie movie : movieList) {
             APIMovie apiMovie = this.movieService.getMovieWithAPI(movie.getTitle());
+            if(apiMovie == null) {
+                feedbackView.printMovieNotFound();
+                return;
+            }
+
             feedbackView.printAPIMovie(apiMovie);
         }
     }
@@ -102,7 +107,7 @@ public class MovieController {
             return;
         }
 
-        feedbackView.printMovieNotRemoved();
+        feedbackView.printMovieNotFound();
     }
 
     public void filterByWord() {
