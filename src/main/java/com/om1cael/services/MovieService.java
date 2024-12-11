@@ -1,5 +1,6 @@
 package com.om1cael.services;
 
+import com.om1cael.model.APIMovie;
 import com.om1cael.model.MovieStatus;
 import com.om1cael.model.Movie;
 
@@ -30,6 +31,11 @@ public class MovieService {
         return movie;
     }
 
+    public APIMovie getMovieWithAPI(String title) {
+        APIService apiService = new APIService();
+        return apiService.mapToJson(title).join();
+    }
+
     public Movie editMovie(int id, int field, String content) {
         List<Movie> movieList = this.movieStorageService.getMovies();
         if(movieList == null || id > movieList.size() || movieList.get(id) == null) return null;
@@ -48,19 +54,6 @@ public class MovieService {
         return movie;
     }
 
-    private MovieStatus mapMovieStatus(String content) {
-        int contentIndex = Integer.parseInt(content);
-        MovieStatus movieStatus;
-
-        switch(contentIndex) {
-            case 0 -> movieStatus = MovieStatus.WATCHED;
-            case 1 -> movieStatus = MovieStatus.TO_WATCH;
-            default -> movieStatus = MovieStatus.NO_INTEREST;
-        }
-
-        return movieStatus;
-    }
-
     public Movie removeMovie(int id) {
         List<Movie> movieList = this.movieStorageService.getMovies();
         if(movieList == null || id > movieList.size()) return null;
@@ -75,20 +68,6 @@ public class MovieService {
         }
 
         return null;
-    }
-
-    private List<Movie> assignIDAfterRemoval(List<Movie> movieList) {
-        List<Movie> modifiedMovieList = new ArrayList<>();
-
-        int index = 0;
-        for(Movie movieInList : movieList) {
-            movieInList.setId(index);
-            index++;
-
-            modifiedMovieList.add(movieInList);
-        }
-
-        return modifiedMovieList;
     }
 
     public List<Movie> filterByWord(String word) {
@@ -113,6 +92,33 @@ public class MovieService {
         return this.movieStorageService.getMovies().stream().
                 filter(movie -> movie.getRating() == rating)
                 .toList();
+    }
+
+    private MovieStatus mapMovieStatus(String content) {
+        int contentIndex = Integer.parseInt(content);
+        MovieStatus movieStatus;
+
+        switch(contentIndex) {
+            case 0 -> movieStatus = MovieStatus.WATCHED;
+            case 1 -> movieStatus = MovieStatus.TO_WATCH;
+            default -> movieStatus = MovieStatus.NO_INTEREST;
+        }
+
+        return movieStatus;
+    }
+
+    private List<Movie> assignIDAfterRemoval(List<Movie> movieList) {
+        List<Movie> modifiedMovieList = new ArrayList<>();
+
+        int index = 0;
+        for(Movie movieInList : movieList) {
+            movieInList.setId(index);
+            index++;
+
+            modifiedMovieList.add(movieInList);
+        }
+
+        return modifiedMovieList;
     }
 
     private int retryMovieID() {

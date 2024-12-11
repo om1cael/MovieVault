@@ -1,5 +1,6 @@
 package com.om1cael.controller;
 
+import com.om1cael.model.APIMovie;
 import com.om1cael.model.Movie;
 import com.om1cael.model.MovieStatus;
 import com.om1cael.services.MovieService;
@@ -56,6 +57,19 @@ public class MovieController {
         }
 
         feedbackView.printMovieList(movieList);
+    }
+
+    public void listMoviesWithAPI() {
+        List<Movie> movieList = this.movieStorageService.getMovies();
+        if(movieList == null) {
+            feedbackView.printNoMovies();
+            return;
+        }
+
+        for(Movie movie : movieList) {
+            APIMovie apiMovie = this.movieService.getMovieWithAPI(movie.getTitle());
+            feedbackView.printAPIMovie(apiMovie);
+        }
     }
 
     public void editMovie() {

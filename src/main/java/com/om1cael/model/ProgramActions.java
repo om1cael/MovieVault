@@ -2,7 +2,8 @@ package com.om1cael.model;
 
 public enum ProgramActions {
     ADD_MOVIE("Add a new movie"),
-    LIST_MOVIES("List your movies"),
+    LIST_MOVIES("List your movies with your own info"),
+    LIST_MOVIES_WITH_API("List your movies with the OMDB API info"),
     EDIT_MOVIE("Edit a movie"),
     REMOVE_MOVIE("Remove a movie"),
     FILTER_BY_WORD("Filter by word"),

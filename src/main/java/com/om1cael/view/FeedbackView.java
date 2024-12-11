@@ -1,5 +1,6 @@
 package com.om1cael.view;
 
+import com.om1cael.model.APIMovie;
 import com.om1cael.model.Movie;
 
 import java.util.List;
@@ -27,6 +28,16 @@ public class FeedbackView {
             System.out.println(" - Your rating: " + movie.getRating());
             System.out.println(" - Status: " + movie.getStatus().getDescription());
         });
+    }
+
+    public void printAPIMovie(APIMovie apiMovie) {
+        System.out.println();
+        System.out.println(apiMovie.title() + ":");
+        System.out.println(" - Year(s): " + apiMovie.year());
+        System.out.println(" - Date of release: " + apiMovie.released());
+        System.out.println(" - Genre(s): " + apiMovie.genre());
+        System.out.println(" - Plot: " + apiMovie.plot());
+        System.out.println(" - IMDB Rating: " + apiMovie.imdbRating());
     }
 
     public void printNoMovies() {

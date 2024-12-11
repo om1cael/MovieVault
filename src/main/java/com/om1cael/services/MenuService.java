@@ -33,6 +33,7 @@ public class MenuService {
         switch (choices.get(inputChoice)) {
             case ADD_MOVIE -> movieController.addMovie();
             case LIST_MOVIES -> movieController.listMovies();
+            case LIST_MOVIES_WITH_API -> movieController.listMoviesWithAPI();
             case EDIT_MOVIE -> movieController.editMovie();
             case REMOVE_MOVIE -> movieController.removeMovie();
             case FILTER_BY_WORD -> movieController.filterByWord();
