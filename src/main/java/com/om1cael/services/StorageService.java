@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class StorageService {
-    private final Path storagePath = Path.of("/boot/movies.json");
+    private final Path storagePath = Path.of("movies.json");
 
     public StorageService() {
         this.createJsonFile();
