@@ -12,17 +12,15 @@ import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 
 public class APIService {
-    private URI apiEndpoint;
-    private final Duration apiFetchTimeout;
-    private final String apiKey = System.getenv("OMDB_API_KEY");
 
-    private final byte TIMEOUT_IN_SECONDS = 10;
+    private URI apiEndpoint;
+    private final Duration apiFetchTimeout = Duration.ofSeconds(10);
+    private final String apiKey = System.getenv("OMDB_API_KEY");
 
     public APIService() {
         if(apiKey == null || apiKey.isEmpty())
             throw new IllegalStateException("Please, define the API key!");
 
-        this.apiFetchTimeout = Duration.ofSeconds(TIMEOUT_IN_SECONDS);
         this.apiEndpoint = URI.create("http://www.omdbapi.com/?apikey=" + this.apiKey + "&t=");
     }
 
