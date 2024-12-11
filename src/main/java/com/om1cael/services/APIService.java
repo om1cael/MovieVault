@@ -26,14 +26,14 @@ public class APIService {
 
     public CompletableFuture<String> fetchAPI(String movieTitle) {
         movieTitle = getFormattedMovieTitle(movieTitle);
-        this.apiEndpoint = URI.create(this.apiEndpoint + movieTitle);
+        URI apiMovieEndPoint = URI.create(this.apiEndpoint + movieTitle);
 
         try(HttpClient httpClient = HttpClient.newHttpClient()) {
             HttpRequest httpRequest = HttpRequest
                     .newBuilder()
                     .GET()
                     .timeout(apiFetchTimeout)
-                    .uri(this.apiEndpoint)
+                    .uri(apiMovieEndPoint)
                     .build();
 
             CompletableFuture<HttpResponse<String>> futureResponse =
