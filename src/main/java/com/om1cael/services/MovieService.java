@@ -4,7 +4,6 @@ import com.om1cael.model.APIMovie;
 import com.om1cael.model.MovieStatus;
 import com.om1cael.model.Movie;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovieService {
@@ -20,13 +19,8 @@ public class MovieService {
                          byte rating,
                          int movieStatusChoice
     ) {
-        MovieStatus movieStatus = switch(movieStatusChoice) {
-            case 1 -> MovieStatus.WATCHED;
-            case 2 -> MovieStatus.TO_WATCH;
-            default -> MovieStatus.NO_INTEREST;
-        };
 
-        Movie movie = new Movie(retryMovieID(), movieTitle, movieGenre, releaseYear, rating, movieStatus);
+        Movie movie = new Movie(retryMovieID(), movieTitle, movieGenre, releaseYear, rating, mapMovieStatus(String.valueOf(movieStatusChoice)));
         this.storageService.saveToFile(movie);
         return movie;
     }

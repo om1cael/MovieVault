@@ -31,9 +31,9 @@ public class MovieController {
         int releaseYear = this.inputParser.getNumberInput(" - Release year: ", 1800, LocalDate.now().getYear(), false);
         byte rating = (byte)this.inputParser.getNumberInput(" - Rating (0-5): ", 0, 5, false);
         int movieStatusChoice = this.inputParser.getNumberInput(
-                " - Status (1 - Watched, 2 - To watch, 3 - Not interested in): ",
-                1,
-                3,
+                " - Status (0 - Watched, 1 - To watch, 2 - Not interested in): ",
+                0,
+                2,
                 false
         );
 
