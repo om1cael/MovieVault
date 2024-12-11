@@ -91,6 +91,12 @@ public class MovieService {
         return modifiedMovieList;
     }
 
+    public List<Movie> filterByWord(String word) {
+        return this.movieStorageService.getMovies().stream().
+                filter(movie -> movie.getTitle().toLowerCase().contains(word.toLowerCase()))
+                .toList();
+    }
+
     public List<Movie> filterByGenre(String genre) {
         return this.movieStorageService.getMovies().stream().
                 filter(movie -> movie.getGenre().equalsIgnoreCase(genre))

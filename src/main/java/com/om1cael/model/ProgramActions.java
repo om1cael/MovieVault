@@ -5,6 +5,7 @@ public enum ProgramActions {
     LIST_MOVIES("List your movies"),
     EDIT_MOVIE("Edit a movie"),
     REMOVE_MOVIE("Remove a movie"),
+    FILTER_BY_WORD("Filter by word"),
     FILTER_BY_GENRE("Filter by genre"),
     FILTER_BY_YEAR("Filter by year of release"),
     FILTER_BY_RATING("Filter by rating");

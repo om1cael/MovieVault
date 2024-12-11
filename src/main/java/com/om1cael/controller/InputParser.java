@@ -15,8 +15,15 @@ public class InputParser {
 
     public String getTextInput(String message) {
         System.out.print(message);
+        return this.scanner.nextLine();
+    }
 
-        this.scanner.nextLine();
+    public String getTextInput(String message, boolean afterNumberInput) {
+        System.out.print(message);
+
+        // If we get this input after a number input, we need to skip a line before accepting a new one.
+        if(afterNumberInput) this.scanner.nextLine();
+
         return this.scanner.nextLine();
     }
 

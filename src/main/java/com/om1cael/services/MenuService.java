@@ -12,19 +12,13 @@ public class MenuService {
     private final InputParser inputParser;
     private final MovieController movieController;
 
-    private final HashMap<Integer, ProgramActions> choices = new HashMap<>(Map.of(
-            1, ProgramActions.ADD_MOVIE,
-            2, ProgramActions.LIST_MOVIES,
-            3, ProgramActions.EDIT_MOVIE,
-            4, ProgramActions.REMOVE_MOVIE,
-            5, ProgramActions.FILTER_BY_GENRE,
-            6, ProgramActions.FILTER_BY_YEAR,
-            7, ProgramActions.FILTER_BY_RATING
-    ));
+    private final HashMap<Integer, ProgramActions> choices = new HashMap<>();
 
     public MenuService() {
         this.inputParser = new InputParser(new Scanner(System.in));
         this.movieController = new MovieController();
+
+        this.populateChoices();
     }
 
     public boolean handleInput() {
@@ -41,6 +35,7 @@ public class MenuService {
             case LIST_MOVIES -> movieController.listMovies();
             case EDIT_MOVIE -> movieController.editMovie();
             case REMOVE_MOVIE -> movieController.removeMovie();
+            case FILTER_BY_WORD -> movieController.filterByWord();
             case FILTER_BY_GENRE -> movieController.filterByGenre();
             case FILTER_BY_YEAR -> movieController.filterByYear();
             case FILTER_BY_RATING -> movieController.filterByRating();
@@ -50,6 +45,15 @@ public class MenuService {
 
     private boolean isInputValid(int inputChoice) {
         return choices.containsKey(inputChoice);
+    }
+
+    private void populateChoices() {
+        int index = 1;
+
+        for(ProgramActions programAction : ProgramActions.values()) {
+            choices.put(index, programAction);
+            index++;
+        }
     }
 
     public HashMap<Integer, ProgramActions> getChoices() {

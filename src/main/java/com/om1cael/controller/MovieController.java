@@ -92,6 +92,13 @@ public class MovieController {
         feedbackView.printMovieNotRemoved();
     }
 
+    public void filterByWord() {
+        String word = this.inputParser.getTextInput("Word: ");
+        List<Movie> filteredList = this.movieService.filterByWord(word);
+        feedbackView.printFilterFeedback(filteredList,
+                "List of movies that contains \"" + word + "\" in the title");
+    }
+
     public void filterByGenre() {
         String genre = this.inputParser.getTextInput("Genre: ");
         List<Movie> filteredList = this.movieService.filterByGenre(genre);
@@ -124,7 +131,7 @@ public class MovieController {
                     )
             );
         } else {
-            content = this.inputParser.getTextInput("New content: ");
+            content = this.inputParser.getTextInput("New content: ", true);
         }
         return content;
     }
