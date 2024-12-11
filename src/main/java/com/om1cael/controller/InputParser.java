@@ -15,6 +15,8 @@ public class InputParser {
 
     public String getTextInput(String message) {
         System.out.print(message);
+
+        this.scanner.nextLine();
         return this.scanner.nextLine();
     }
 

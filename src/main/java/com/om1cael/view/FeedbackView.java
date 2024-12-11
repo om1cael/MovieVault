@@ -33,6 +33,21 @@ public class FeedbackView {
         System.out.println("You did not add any movie.");
     }
 
+    public void printSuccessfulEdit(int field, Movie movie) {
+        switch(field) {
+            case 0 -> System.out.println("Title set to " + movie.getTitle());
+            case 1 -> System.out.println("Genre set to " + movie.getGenre());
+            case 2 -> System.out.println("Release year set to " + movie.getReleaseYear());
+            case 3 -> System.out.println("Rating set to " + movie.getRating());
+            case 4 -> System.out.println("Status set to " + movie.getStatus().getDescription());
+            default -> System.out.println("No editing was made.");
+        }
+    }
+
+    public void printNoEdit() {
+        System.out.println("It was not possible to edit the movie.");
+    }
+
     public void printFilterFeedback(List<Movie> filteredList,
                                     String successfulMessage
     ) {

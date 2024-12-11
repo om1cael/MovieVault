@@ -30,7 +30,36 @@ public class MovieService {
         return movie;
     }
 
-    public void editMovie() {}
+    public Movie editMovie(int id, int field, String content) {
+        List<Movie> movieList = this.movieStorageService.getMovies();
+        if(movieList == null || id > movieList.size() || movieList.get(id) == null) return null;
+        Movie movie = movieList.get(id);
+
+        switch(field) {
+            case 0 -> movie.setTitle(content);
+            case 1 -> movie.setGenre(content);
+            case 2 -> movie.setReleaseYear(Integer.parseInt(content));
+            case 3 -> movie.setRating(Byte.parseByte(content));
+            case 4 -> movie.setStatus(mapMovieStatus(content));
+        }
+
+        movieList.set(id, movie);
+        this.movieStorageService.addToMovies(movieList);
+        return movie;
+    }
+
+    private MovieStatus mapMovieStatus(String content) {
+        int contentIndex = Integer.parseInt(content);
+        MovieStatus movieStatus;
+
+        switch(contentIndex) {
+            case 0 -> movieStatus = MovieStatus.WATCHED;
+            case 1 -> movieStatus = MovieStatus.TO_WATCH;
+            default -> movieStatus = MovieStatus.NO_INTEREST;
+        }
+
+        return movieStatus;
+    }
 
     public Movie removeMovie(int id) {
         List<Movie> movieList = this.movieStorageService.getMovies();

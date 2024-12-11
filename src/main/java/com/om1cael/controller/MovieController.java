@@ -1,6 +1,7 @@
 package com.om1cael.controller;
 
 import com.om1cael.model.Movie;
+import com.om1cael.model.MovieStatus;
 import com.om1cael.services.MovieService;
 import com.om1cael.services.MovieStorageService;
 import com.om1cael.view.FeedbackView;
@@ -57,7 +58,27 @@ public class MovieController {
         feedbackView.printMovieList(movieList);
     }
 
-    public void editMovie() {}
+    public void editMovie() {
+        String content;
+
+        int id = this.inputParser.getNumberInput("Movie ID: ", 0, Integer.MAX_VALUE, true);
+        int field = this.inputParser.getNumberInput(
+                "Field (0 - Title, 1 - Genre, 2 - Year, 3 - Rating, 4 - Status): ",
+                0,
+                4,
+                true);
+
+        content = getEditContent(field);
+
+        Movie movie = this.movieService.editMovie(id, field, content);
+
+        if(movie != null) {
+            feedbackView.printSuccessfulEdit(field, movie);
+            return;
+        }
+
+        feedbackView.printNoEdit();
+    }
 
     public void removeMovie() {
         int id = this.inputParser.getNumberInput("Movie ID: ", 0, Integer.MAX_VALUE, true);
@@ -90,5 +111,21 @@ public class MovieController {
         List<Movie> filteredList = this.movieService.filterByRating(rating);
         feedbackView.printFilterFeedback(filteredList,
                 "List of movies with rating of " + rating);
+    }
+
+    private String getEditContent(int field) {
+        String content;
+        if(field == 4) {
+            content = String.valueOf(this.inputParser.getNumberInput(
+                            "Status (0 - Watched, 1 - To Watch, 2 - No Interest): ",
+                            0,
+                            2,
+                            false
+                    )
+            );
+        } else {
+            content = this.inputParser.getTextInput("New content: ");
+        }
+        return content;
     }
 }
