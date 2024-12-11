@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieService {
-    private final MovieStorageService movieStorageService;
+    private final StorageService storageService;
 
     public MovieService() {
-        this.movieStorageService = new MovieStorageService();
+        this.storageService = new StorageService();
     }
 
     public Movie addMovie(String movieTitle,
@@ -27,7 +27,7 @@ public class MovieService {
         };
 
         Movie movie = new Movie(retryMovieID(), movieTitle, movieGenre, releaseYear, rating, movieStatus);
-        this.movieStorageService.addToMovies(movie);
+        this.storageService.saveToFile(movie);
         return movie;
     }
 
@@ -37,7 +37,7 @@ public class MovieService {
     }
 
     public Movie editMovie(int id, int field, String content) {
-        List<Movie> movieList = this.movieStorageService.getMovies();
+        List<Movie> movieList = this.storageService.readFromFile();
         if(movieList == null || id > movieList.size() || movieList.get(id) == null) return null;
         Movie movie = movieList.get(id);
 
@@ -50,12 +50,12 @@ public class MovieService {
         }
 
         movieList.set(id, movie);
-        this.movieStorageService.addToMovies(movieList);
+        this.storageService.saveToFile(movieList);
         return movie;
     }
 
     public Movie removeMovie(int id) {
-        List<Movie> movieList = this.movieStorageService.getMovies();
+        List<Movie> movieList = this.storageService.readFromFile();
         if(movieList == null || id > movieList.size()) return null;
 
         if(movieList.get(id) != null) {
@@ -63,7 +63,7 @@ public class MovieService {
             movieList.remove(id);
 
             movieList = assignIDAfterRemoval(movieList);
-            this.movieStorageService.addToMovies(movieList);
+            this.storageService.saveToFile(movieList);
             return movie;
         }
 
@@ -71,25 +71,25 @@ public class MovieService {
     }
 
     public List<Movie> filterByWord(String word) {
-        return this.movieStorageService.getMovies().stream().
+        return this.storageService.readFromFile().stream().
                 filter(movie -> movie.getTitle().toLowerCase().contains(word.toLowerCase()))
                 .toList();
     }
 
     public List<Movie> filterByGenre(String genre) {
-        return this.movieStorageService.getMovies().stream().
+        return this.storageService.readFromFile().stream().
                 filter(movie -> movie.getGenre().equalsIgnoreCase(genre))
                 .toList();
     }
 
     public List<Movie> filterByYear(int year) {
-        return this.movieStorageService.getMovies().stream().
+        return this.storageService.readFromFile().stream().
                 filter(movie -> movie.getReleaseYear() == year)
                 .toList();
     }
 
     public List<Movie> filterByRating(byte rating) {
-        return this.movieStorageService.getMovies().stream().
+        return this.storageService.readFromFile().stream().
                 filter(movie -> movie.getRating() == rating)
                 .toList();
     }
@@ -122,7 +122,7 @@ public class MovieService {
     }
 
     private int retryMovieID() {
-        List<Movie> movieList = this.movieStorageService.getMovies();
+        List<Movie> movieList = this.storageService.readFromFile();
 
         if(movieList == null) {
             return 0;

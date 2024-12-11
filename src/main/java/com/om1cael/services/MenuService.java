@@ -5,7 +5,6 @@ import com.om1cael.model.ProgramActions;
 import com.om1cael.controller.InputParser;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class MenuService {
